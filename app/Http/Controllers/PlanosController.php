@@ -14,7 +14,10 @@ class PlanosController extends Controller
      */
     public function index()
     {
-        //
+        $nome_pagina = 'Planos';
+        $planos = Planos::all();
+
+        return view('admin.planos.index',compact('planos','nome_pagina'));
     }
 
     /**
@@ -24,7 +27,8 @@ class PlanosController extends Controller
      */
     public function create()
     {
-        //
+        $nome_pagina = "Formulario Planos";
+        return view('admin.planos.create',compact('nome_pagina'));
     }
 
     /**
