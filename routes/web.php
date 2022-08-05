@@ -1,5 +1,10 @@
 <?php
 
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +19,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('padrao.padrao');
-});
+    return redirect(url('dashboard'));
+})->middleware('auth');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $nome_pagina = 'Dashboard';
+    $planos = \App\Models\Planos::all();
+    return view('cliente.index',compact('nome_pagina','planos'));
 })->middleware(['auth'])->name('dashboard');
 
 Route::group(['prefix'=>'admin','as'=>'admin.'], function() {
@@ -37,5 +44,32 @@ Route::get('indicacao/{id}', function ($id) {
 
     return view('auth.indicacao', compact('patrocinador'));
 });
+
+Route::post('indicacao', function (\Illuminate\Http\Request $request) {
+
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        'telefone' => ['required']
+    ]);
+
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'telefone' => $request['telefone'],
+        'link' => md5($request['email']),
+        'quem'=> $request['quem']
+
+    ]);
+
+    event(new Registered($user));
+
+    Auth::login($user);
+
+    return redirect(RouteServiceProvider::HOME);
+
+})->name('indicacao');
 
 require __DIR__.'/auth.php';

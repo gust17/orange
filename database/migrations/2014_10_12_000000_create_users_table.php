@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('telefone');
             $table->string('password');
             $table->string('link');
-            $table->string('quem');
+            $table->string('quem')->nullable();
             $table->integer('clique')->default(0);
             $table->rememberToken();
             $table->timestamps();

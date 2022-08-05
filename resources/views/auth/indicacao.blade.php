@@ -63,7 +63,7 @@ License: For each use you must have a valid license purchased only from above li
             <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
                 <!--begin::Form-->
                 @include('flash-message')
-                <form action="{{route('register')}}" method="post" class="form w-100">
+                <form action="{{url('registerindicacao')}}" method="post" class="form w-100">
                     @csrf
                     <!--begin::Heading-->
                     <div class="mb-10 text-center">
@@ -94,6 +94,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <!--end::Input group-->
                     <!--begin::Input group-->
+                    <input type="hidden" name="quem" value="{{$patrocinador->link}}">
                     <div class="fv-row mb-7">
                         <label class="form-label fw-bolder text-dark fs-6">Email</label>
                         <input class="form-control form-control-lg form-control-solid" type="email" placeholder=""
