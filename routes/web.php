@@ -23,6 +23,19 @@ Route::get('/dashboard', function () {
 
 Route::group(['prefix'=>'admin','as'=>'admin.'], function() {
     Route::resource('planos',\App\Http\Controllers\PlanosController::class);
+    Route::get('plano/cadnivel/{id}',[\App\Http\Controllers\PlanosController::class,'cadnivel']);
+});
+
+
+Route::get('indicacao/{id}', function ($id) {
+    $user = \App\Models\User::where('link', $id)->first();
+    $clique = $user->clique + 1;
+    $user->fill(['clique' => $clique]);
+    $user->save();
+
+    $patrocinador = $user;
+
+    return view('auth.indicacao', compact('patrocinador'));
 });
 
 require __DIR__.'/auth.php';

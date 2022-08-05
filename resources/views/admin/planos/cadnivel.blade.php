@@ -5,7 +5,7 @@
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
 
-            <form class="form d-flex flex-column flex-lg-row" action="{{route('admin.planos.store')}}" method="post">
+            <form class="form d-flex flex-column flex-lg-row" action="" method="post">
                 @csrf
                 <!--begin::Aside column-->
 
@@ -25,57 +25,32 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>Dados Planos</h2>
+                                            <h2>Cadastro de Niveis do Plano {{$plano->name}}</h2>
                                         </div>
                                     </div>
                                     <!--end::Card header-->
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <!--begin::Input group-->
+                                        @for($i=1;$i<=$plano->qtd_nivel;$i++)
+                                            <div>
+                                                <!--begin::Label-->
+                                                <label class="required form-label">Nivel {{$i}}</label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input type="text" name="name" class="form-control mb-2"
+                                                       placeholder="Porcentagem do {{$i}}º nivel" value="{{old('name')}}"/>
+                                                <!--end::Input-->
+                                                <!--begin::Description-->
+
+                                                <!--end::Description-->
+                                            </div>
+                                        @endfor
 
 
-                                        <div>
-                                            <!--begin::Label-->
-                                            <label class="required form-label">Nome do Plano</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" name="name" class="form-control mb-2"
-                                                   placeholder="Nome" value="{{old('name')}}"/>
-                                            <!--end::Input-->
-                                            <!--begin::Description-->
-
-                                            <!--end::Description-->
-                                        </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
-                                        <div>
-                                            <!--begin::Label-->
-                                            <label class="required form-label">Valor do Plano</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" name="valor" class="form-control mb-2"
-                                                   placeholder="Valor de Plano" value="{{old('valor')}}"/>
-                                            <!--end::Description-->
-                                        </div>
-                                        <div>
-                                            <!--begin::Label-->
-                                            <label class="required form-label">Taxa de Performace</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" name="taxa_performance" class="form-control mb-2"
-                                                   placeholder="Taxa de Performance"
-                                                   value="{{old('taxa_perfomance')}}"/>
-                                            <!--end::Description-->
-                                        </div>
-                                        <div>
-                                            <!--begin::Label-->
-                                            <label class="required form-label">Quantidade de Niveis</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input type="text" name="qtd_nivel" class="form-control mb-2"
-                                                   placeholder="Numero de Niveis" value="{{old('qtd_nivel')}}"/>
-                                            <!--end::Description-->
-                                        </div>
+
 
 
                                         <!--end::Input group-->
@@ -112,5 +87,4 @@
         </div>
         <!--end::Container-->
     </div>
-
 @endsection
