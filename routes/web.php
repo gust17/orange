@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $nome_pagina = 'Dashboard';
     $planos = \App\Models\Planos::all();
-    return view('cliente.index',compact('nome_pagina','planos'));
+    return view('padrao.novopadrao',compact('nome_pagina','planos'));
 })->middleware(['auth'])->name('dashboard');
 
 Route::group(['prefix'=>'admin','as'=>'admin.'], function() {
