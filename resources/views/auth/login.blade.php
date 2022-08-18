@@ -66,7 +66,7 @@
                             <label class="form-label fw-bolder text-dark fs-6 mb-0">Senha</label>
                             <!--end::Label-->
                             <!--begin::Link-->
-                            <a href="{{route('password.reset')}}" class="link-primary fs-6 fw-bolder">Esquceu a senha ?</a>
+                            <a href="{{route('password.email')}}" class="link-primary fs-6 fw-bolder">Esquceu a senha ?</a>
                             <!--end::Link-->
                         </div>
                         <!--end::Wrapper-->
